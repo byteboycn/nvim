@@ -115,6 +115,10 @@ M.setup = function()
   -- nvimTree
   map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
 
+  -- 快速滚动
+  map("n", "<C-d>", "10j", opt)
+  map("n", "<C-u>", "10k", opt)
+
   -- set keybinds for both INSERT and VISUAL.
   vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
   vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})

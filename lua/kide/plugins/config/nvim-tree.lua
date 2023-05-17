@@ -46,7 +46,7 @@ require("nvim-tree").setup({
     timeout = 400,
   },
   view = {
-    width = 34,
+    width = 60,
     -- height = 40,
     side = "left",
     hide_root_folder = false,
