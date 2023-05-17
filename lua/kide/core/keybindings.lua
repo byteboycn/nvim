@@ -18,7 +18,7 @@ M.setup = function()
   -- 取消搜索高亮显示
   map("n", "<Leader><CR>", ":nohlsearch<CR>", opt)
   map("n", "<Esc>", ":nohlsearch<CR>", opt)
-
+  -- 移动焦点到不同窗口
   keymap("n", "<C-h>", "<C-w>h", opt)
   keymap("n", "<C-j>", "<C-w>j", opt)
   keymap("n", "<C-k>", "<C-w>k", opt)

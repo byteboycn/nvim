@@ -33,7 +33,7 @@ vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 
 -- 右侧参考线，超过表示代码太长了，考虑换行
-vim.opt.colorcolumn = "120"
+-- vim.opt.colorcolumn = "120"
 
 -- 边搜索边高亮
 vim.opt.incsearch = true
