@@ -44,6 +44,9 @@ which_key.setup({
 })
 
 which_key.register({
+  ["w"] = { "<cmd>w!<CR>", "Save" },
+  ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
+  ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
   g = {
     name = "Git",
     g = { "<cmd>lua require 'kide.plugins.config.utils.terminal'.lazygit_toggle()<cr>", "Lazygit" },
@@ -95,6 +98,25 @@ which_key.register({
       "Workspace Symbols",
     },
     e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
+  },
+  s = {
+    name = "Search",
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    f = { "<cmd>Telescope find_files<cr>", "Find File" },
+    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    H = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
+    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+    R = { "<cmd>Telescope registers<cr>", "Registers" },
+    t = { "<cmd>Telescope live_grep<cr>", "Text" },
+    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    C = { "<cmd>Telescope commands<cr>", "Commands" },
+    l = { "<cmd>Telescope resume<cr>", "Resume last search" },
+    p = {
+      "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>",
+      "Colorscheme with Preview",
+    },
   },
 
 }, {
