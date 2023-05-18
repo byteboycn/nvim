@@ -785,6 +785,7 @@ require("lazy").setup({
       require("copilot_cmp").setup()
     end,
   },
+  { "Tastyep/structlog.nvim", lazy = true },
 }, {
   ui = {
     icons = {
