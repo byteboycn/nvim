@@ -1,3 +1,77 @@
+local M = {}
+
+vim.cmd [[
+  function! QuickFixToggle()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+      copen
+    else
+      cclose
+    endif
+  endfunction
+]]
+
+M.defaults = {
+  {
+    name = "BufferKill",
+    fn = function()
+      require("kide.plugins.config.bufferline").buf_kill "bd"
+    end,
+  },
+  {
+    name = "LvimToggleFormatOnSave",
+    fn = function()
+      require("lvim.core.autocmds").toggle_format_on_save()
+    end,
+  },
+  {
+    name = "LvimInfo",
+    fn = function()
+      require("lvim.core.info").toggle_popup(vim.bo.filetype)
+    end,
+  },
+  {
+    name = "LvimDocs",
+    fn = function()
+      local documentation_url = "https://www.lunarvim.org/docs/beginners-guide"
+      if vim.fn.has "mac" == 1 or vim.fn.has "macunix" == 1 then
+        vim.fn.execute("!open " .. documentation_url)
+      elseif vim.fn.has "win32" == 1 or vim.fn.has "win64" == 1 then
+        vim.fn.execute("!start " .. documentation_url)
+      elseif vim.fn.has "unix" == 1 then
+        vim.fn.execute("!xdg-open " .. documentation_url)
+      else
+        vim.notify "Opening docs in a browser is not supported on your OS"
+      end
+    end,
+  },
+  {
+    name = "LvimCacheReset",
+    fn = function()
+      require("lvim.utils.hooks").reset_cache()
+    end,
+  },
+  {
+    name = "LvimReload",
+    fn = function()
+      require("lvim.config"):reload()
+    end,
+  },
+  {
+    name = "LvimUpdate",
+    fn = function()
+      require("lvim.bootstrap"):update()
+    end,
+  },
+  {
+    name = "LvimSyncCorePlugins",
+    fn = function()
+      require("lvim.plugin-loader").sync_core_plugins()
+    end,
+  },
+  {
+    name = "LvimChangelog",
+    fn = function()
+      require("lvim.core.telescope.custom-finders").view_lunarvim_changelog()
     end,
   },
   {
