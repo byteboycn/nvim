@@ -10,9 +10,9 @@ M.setup = function()
   -- Esc
   -- map("i", "jk", "<C-\\><C-N>", opt)
   -- n 模式下复制内容到系统剪切板
-  map("n", "<Leader>c", '"+yy', opt)
+  map("n", "<Leader>yy", '"+yy', opt)
   -- v 模式下复制内容到系统剪切板
-  map("v", "<Leader>c", '"+yy', opt)
+  map("v", "<Leader>yy", '"+yy', opt)
   -- n 模式下粘贴系统剪切板的内容
   map("n", "<Leader>v", '"+p', opt)
   -- 取消搜索高亮显示
@@ -83,14 +83,14 @@ M.setup = function()
   keymap("n", "<F6>", ":lua require'dap'.step_over()<CR>", opt)
   keymap("n", "<F7>", ":lua require'dap'.step_into()<CR>", opt)
   keymap("n", "<F8>", ":lua require'dap'.step_out()<CR>", opt)
-  keymap("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>", opt)
-  keymap("n", "<leader>dB", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opt)
-  keymap("n", "<leader>dp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", opt)
-  keymap("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>", opt)
-  keymap("n", "<leader>dl", ":lua require'dap'.run_last()<CR>", opt)
+  -- keymap("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>", opt)
+  -- keymap("n", "<leader>dB", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opt)
+  -- keymap("n", "<leader>dp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", opt)
+  -- keymap("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>", opt)
+  -- keymap("n", "<leader>dl", ":lua require'dap'.run_last()<CR>", opt)
 
   -- nvim-dap-ui
-  keymap("n", "<leader>ds", ':lua require("dapui").float_element(vim.Nil, { enter = true}) <CR>', opt)
+  -- keymap("n", "<leader>ds", ':lua require("dapui").float_element(vim.Nil, { enter = true}) <CR>', opt)
 
   -- bufferline.nvim
   keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opt)
