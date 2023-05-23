@@ -7,7 +7,7 @@ require("bufferline").setup({
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
       local s = " "
       for e, n in pairs(diagnostics_dict) do
-        local sym = e == "error" and " " or (e == "warning" and " " or " ")
+        local sym = e == "error" and " " or (e == "warning" and " " or " ")
         s = s .. n .. sym
       end
       return s
@@ -77,10 +77,13 @@ require("bufferline").setup({
     color_icons = true,
     show_buffer_close_icons = true,
     -- show_buffer_default_icon = true,
-    show_close_icon = false,
+    show_close_icon = true,
     show_tab_indicators = true,
     -- separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
-    -- separator_style = "slant",
+    separator_style = "slant",
+    numbers = function(opts)
+      return string.format('%s', opts.ordinal)
+    end,
   },
 })
 
