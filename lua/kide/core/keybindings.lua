@@ -119,6 +119,11 @@ M.setup = function()
   map("n", "<C-d>", "10j", opt)
   map("n", "<C-u>", "10k", opt)
 
+  -- split
+  map("n", "<leader>sh", ":split<CR>", opt)
+  map("n", "<leader>sv", ":vsplit<CR>", opt)--
+  map("n", "<leader>sc", ":close<CR>", opt)
+
   -- set keybinds for both INSERT and VISUAL.
   vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
   vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
