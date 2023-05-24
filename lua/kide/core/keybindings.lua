@@ -121,8 +121,11 @@ M.setup = function()
 
   -- split
   map("n", "<leader>sh", ":split<CR>", opt)
-  map("n", "<leader>sv", ":vsplit<CR>", opt)--
+  map("n", "<leader>sv", ":vsplit<CR>", opt)
   map("n", "<leader>sc", ":close<CR>", opt)
+
+  -- refresh files
+  map("n", "<leader>rr", ":checktime<CR>", opt)
 
   -- set keybinds for both INSERT and VISUAL.
   vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
