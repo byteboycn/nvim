@@ -148,3 +148,7 @@ git clone  https://github.com/JavaHello/nvim.git
 ## 感谢使用
 
 打造一个高效美观的终端环境。欢迎提供各种建议，插件推荐，快捷键定义，主题配色等。
+
+## 常用技巧
+### 文本篇
+1. 全选复制：ggyG

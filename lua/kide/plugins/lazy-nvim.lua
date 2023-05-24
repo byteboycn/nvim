@@ -117,11 +117,11 @@ require("lazy").setup({
   -- use 'morhetz/gruvbox'
   {
     "ellisonleao/gruvbox.nvim",
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
-      require("kide.plugins.config.gruvbox")
+      require("kide.theme.gruvbox").setup()
     end,
   },
   {
@@ -130,13 +130,21 @@ require("lazy").setup({
     lazy = false,
     priority = 1000,
     config = function()
-      -- require("kide.plugins.config.gruvbox")
 
       vim.opt.background = "dark"
       vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_better_performance = true
       vim.cmd([[colorscheme gruvbox-material]])
     end,
+  },
+  {
+    "catppuccin/nvim",
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("kide.theme.catppuccin").setup()
+    end
   },
 
   -- 文件管理

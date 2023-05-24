@@ -15,7 +15,6 @@ local colors = {
 }
 M.colors = colors
 local flat_telescope = {
-
   TelescopeBorder = {
     fg = colors.darker_black,
     bg = colors.darker_black,
@@ -76,6 +75,41 @@ M.load_highlights = function(hl_groups)
   for hl, col in pairs(hl_groups) do
     vim.api.nvim_set_hl(0, hl, col)
   end
+end
+
+function M.setup()
+  require("gruvbox").setup({
+    undercurl = true,
+    underline = true,
+    bold = true,
+    italic = {
+      strings = true,
+      comments = true,
+      operators = false,
+      folds = true,
+    },
+    strikethrough = true,
+    invert_selection = false,
+    invert_signs = false,
+    invert_tabline = false,
+    invert_intend_guides = false,
+    inverse = true, -- invert background for search, diffs, statuslines and errors
+    contrast = "", -- can be "hard", "soft" or empty string
+    palette_overrides = {},
+    overrides = {
+      NormalFloat = {
+        bg = "#313131",
+      },
+      Pmenu = {
+        bg = "#2e2e2e",
+      },
+    },
+    dim_inactive = false,
+    transparent_mode = false,
+  })
+  -- dark or light
+  vim.opt.background = "dark"
+  vim.cmd([[colorscheme gruvbox]])
 end
 
 return M
