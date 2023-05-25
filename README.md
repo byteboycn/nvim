@@ -152,3 +152,10 @@ git clone  https://github.com/JavaHello/nvim.git
 ## 常用技巧
 ### 文本篇
 1. 全选复制：ggyG
+
+## 自动切换输入法
+前提：保留系统自带的ABC英文输入法
+```bash
+curl https://raw.githubusercontent.com/hnakamur/inputsource/master/inputsource -o ./inputsource && chmod a+x ./inputsource && sudo mv ./inputsource /usr/local/bin
+```
+(直接使用sudo curl无法使用代理)
