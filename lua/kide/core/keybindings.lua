@@ -50,6 +50,8 @@ M.setup = function()
   map("t", "tt", "<C-\\><C-N>:ToggleTerm<CR>", opt)
   map("n", "<leader>tv", ":ToggleTerm dir=%:p:h size=100 direction=vertical<CR>", opt)
   map("n", "<leader>th", ":ToggleTerm dir=%:p:h size=30 direction=horizontal<CR>", opt)
+  -- stop and close  
+  map("n", "<C-t>", ":bd!<CR>", opt)
 
 
   -- symbols-outline.nvim
