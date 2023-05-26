@@ -152,6 +152,8 @@ git clone  https://github.com/JavaHello/nvim.git
 ## 常用技巧
 ### 文本篇
 1. 全选复制：ggyG
+2. 大小写转换：guw, gue, gUw, gUe (需要光标在单词首字母处)
+3. 大小写转换：guaw, gUaw (当前光标所在的单词进行转换)
 
 ## 自动切换输入法
 前提：保留系统自带的ABC英文输入法

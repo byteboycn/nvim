@@ -33,7 +33,11 @@ function M.setup()
       types = {},
       operators = {},
     },
-    color_overrides = {},
+    color_overrides = {
+      mocha = {
+        base = "#2B2D30",
+      },
+    },
     custom_highlights = {},
     integrations = {
       cmp = true,
