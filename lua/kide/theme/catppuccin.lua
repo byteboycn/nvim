@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
   require("catppuccin").setup({
-    flavour = "mocha", -- latte, frappe, macchiato, mocha
+    flavour = "frappe", -- latte, frappe, macchiato, mocha
     background = {
       -- :h background
       light = "latte",
@@ -46,6 +46,10 @@ function M.setup()
       telescope = true,
       notify = false,
       mini = false,
+      which_key = true,
+      dashboard = true,
+      mason = true,
+      markdown = true,
       -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
   })

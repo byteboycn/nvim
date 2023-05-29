@@ -163,6 +163,7 @@ require("lazy").setup({
     "akinsho/bufferline.nvim",
     version = "*",
     requires = "kyazdani42/nvim-web-devicons",
+    after = "catppuccin",
     config = function()
       require("kide.plugins.config.bufferline")
     end,

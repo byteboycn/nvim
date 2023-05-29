@@ -28,9 +28,9 @@ vim.opt.relativenumber = true
 vim.opt.numberwidth = 2
 vim.opt.ruler = false
 
--- 高亮所在行
+-- 高亮所在行和列 (光标颜色、闪烁等在terminal中设置)
 vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
+vim.opt.cursorcolumn = false
 
 -- 右侧参考线，超过表示代码太长了，考虑换行
 -- vim.opt.colorcolumn = "120"
@@ -45,9 +45,9 @@ vim.opt.smartcase = true
 vim.opt_global.encoding = "UTF-8"
 
 vim.opt.fileencoding = "UTF-8"
--- jk移动时光标下上方保留8行
-vim.opt.scrolloff = 3
-vim.opt.sidescrolloff = 3
+-- jk移动时光标下上方保留10行
+vim.opt.scrolloff = 7
+vim.opt.sidescrolloff = 7
 
 -- 缩进配置
 vim.opt.tabstop = 4

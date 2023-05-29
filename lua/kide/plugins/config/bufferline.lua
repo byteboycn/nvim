@@ -1,6 +1,7 @@
 local M = {}
 
 require("bufferline").setup({
+  highlights = require("catppuccin.groups.integrations.bufferline").get(),
   options = {
     -- 使用 nvim 内置lsp
     diagnostics = "nvim_lsp",
