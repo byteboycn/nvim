@@ -24,9 +24,9 @@ end
 
 -- 行号
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.numberwidth = 2
-vim.opt.ruler = false
+vim.opt.ruler = true
 
 -- 高亮所在行和列 (光标颜色、闪烁等在terminal中设置)
 vim.opt.cursorline = true
