@@ -121,8 +121,8 @@ M.setup = function()
   map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
 
   -- 快速滚动
-  map("n", "<C-d>", "10j", opt)
-  map("n", "<C-u>", "10k", opt)
+  map("n", "<C-j>", "10j", opt)
+  map("n", "<C-k>", "10k", opt)
 
   -- split
   map("n", "<leader>sh", ":split<CR>", opt)
@@ -164,8 +164,8 @@ M.maplsp = function(client, buffer)
   -- go xx
   -- mapbuf('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opt)
   vim.api.nvim_buf_set_keymap(buffer, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
-  vim.api.nvim_buf_set_keymap(buffer, "n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opt)
-  vim.api.nvim_buf_set_keymap(buffer, "n", "gd", "<cmd>Telescope lsp_definitions<CR>", opt)
+  vim.api.nvim_buf_set_keymap(buffer, "n", "gd", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opt)
+  vim.api.nvim_buf_set_keymap(buffer, "n", "gt", "<cmd>Telescope lsp_definitions<CR>", opt)
   vim.api.nvim_buf_set_keymap(buffer, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
   vim.api.nvim_buf_set_keymap(buffer, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opt)
   -- mapbuf('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opt)

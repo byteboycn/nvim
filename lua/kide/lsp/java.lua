@@ -316,6 +316,11 @@ config["on_attach"] = function(client, buffer)
   -- vim.notify(vim.api.nvim_buf_get_name(bufnr), vim.log.levels.INFO)
 end
 
+local formatters = require "kide.lsp.null-ls.formatters"
+formatters.setup {
+  { command = "google_java_format", filetypes = { "java" } },
+}
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- capabilities.experimental = {
 --   hoverActions = true,

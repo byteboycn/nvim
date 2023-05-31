@@ -21,7 +21,7 @@ local function from_node_modules(command)
     return nil
   end
 
-  local join_paths = require("lvim.utils").join_paths
+  local join_paths = require("kide.utils").join_paths
   return join_paths(root_dir, "node_modules", ".bin", command)
 end
 

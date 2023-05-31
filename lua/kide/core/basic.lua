@@ -93,6 +93,7 @@ autocmd("FileType", {
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.cindent = true
 
 -- 使用增强状态栏后不再需要 vim 的模式提示
 vim.opt.showmode = false
