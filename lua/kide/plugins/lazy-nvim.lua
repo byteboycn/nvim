@@ -559,7 +559,7 @@ require("lazy").setup({
     "windwp/nvim-autopairs",
     event = { "InsertEnter", "VeryLazy" },
     config = function()
-      require("kide.plugins.config.nvim-autopairs").setup()
+      require("kide.plugins.config.nvim-autopairs")
     end,
     dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" },
   },
