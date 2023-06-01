@@ -134,6 +134,9 @@ M.setup = function()
   -- refresh files
   map("n", "<leader>rr", ":checktime<CR>", opt)
 
+  -- 粘贴替换
+  map("n", "<leader>ri", "ciw<C-r>0<ESC>", opt)
+
   -- set keybinds for both INSERT and VISUAL.
   vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
   vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
