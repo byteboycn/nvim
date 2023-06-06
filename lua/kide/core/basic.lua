@@ -55,6 +55,11 @@ vim.opt.softtabstop = 4
 -- > < 时移动长度
 vim.opt.shiftwidth = 4
 
+-- 自动切换输入法 (更多事件参考：https://neovim.io/doc/user/autocmd.html#autocmd-events)
+vim.cmd('autocmd InsertLeave * :silent :!inputsource com.apple.keylayout.ABC')
+vim.cmd('autocmd VimEnter * :silent :!inputsource com.apple.keylayout.ABC')
+vim.cmd('autocmd FocusGained * :silent :!inputsource com.apple.keylayout.ABC')
+
 local autocmd = vim.api.nvim_create_autocmd
 autocmd("FileType", {
   pattern = {

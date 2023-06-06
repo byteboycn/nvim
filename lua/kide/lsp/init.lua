@@ -1,3 +1,5 @@
+local M = {}
+
 local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup({
   ensure_installed = {
@@ -123,3 +125,13 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 --     vim.api.nvim_echo({ { msg } }, true, {})
 --   end
 -- end
+function M.setup()
+  Log:debug("Setting up LSP support")
+
+  local lsp_status_ok, _ = pcall(require, "lspconfig")
+  if not lsp_status_ok then
+    return
+  end
+end
+
+return M
