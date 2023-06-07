@@ -1,5 +1,5 @@
 local M = {}
-
+local Log = require("kide.core.log")
 local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup({
   ensure_installed = {
@@ -127,6 +127,7 @@ function M.setup()
   if not lsp_status_ok then
     return
   end
+
 end
 
 return M
