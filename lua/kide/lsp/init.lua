@@ -14,14 +14,9 @@ local server_configs = {
   -- sumneko_lua -> lua_ls
   lua_ls = require("kide.lsp.lua_ls"), -- /lua/lsp/lua.lua
   -- jdtls = require "lsp.java", -- /lua/lsp/jdtls.lua
-  -- jsonls = require("lsp.jsonls"),
-  clangd = require("kide.lsp.clangd"),
-  tsserver = require("kide.lsp.tsserver"),
-  html = require("kide.lsp.html"),
   pyright = require("kide.lsp.pyright"),
   rust_analyzer = require("kide.lsp.rust_analyzer"),
   sqlls = require("kide.lsp.sqlls"),
-  gopls = require("kide.lsp.gopls"),
   kotlin_language_server = {},
   vuels = {},
   lemminx = require("kide.lsp.lemminx"),
