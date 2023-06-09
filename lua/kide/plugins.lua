@@ -29,7 +29,17 @@ local core_plugins = {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    cmd = { "LspInstall", "LspUninstall" },
+    config = function()
+      require("mason-lspconfig").setup(nvim.lsp.installer.setup)
+
+      -- automatic_installation is handled by lsp-manager
+      local settings = require "mason-lspconfig.settings"
+      settings.current.automatic_installation = false
+    end,
     lazy = true,
+    event = "User FileOpened",
+    dependencies = "mason.nvim",
   },
   {
     "neovim/nvim-lspconfig",
@@ -37,7 +47,9 @@ local core_plugins = {
     config = function()
       require("kide.lsp")
     end,
+    dependencies = { "mason-lspconfig.nvim", "nlsp-settings.nvim" },
   },
+  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
 
   -- 代码片段
   {
