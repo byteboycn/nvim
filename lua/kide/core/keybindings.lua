@@ -20,7 +20,7 @@ M.setup = function()
   map("n", "<Esc>", ":nohlsearch<CR>", opt)
   -- 移动焦点到不同窗口
   keymap("n", "<C-h>", "<C-w>h", opt)
-  keymap("n", "<C-j>", "<C-w>j", opt)
+  keymap("n", "<C-i>", "<C-w>j", opt)
   keymap("n", "<C-k>", "<C-w>k", opt)
   keymap("n", "<C-l>", "<C-w>l", opt)
 
@@ -124,7 +124,7 @@ M.setup = function()
   map("n", "<C-j>", "10j", opt)
   map("n", "<C-k>", "10k", opt)
   map("v", "<C-j>", "10j", opt)
-  map("v", "<C-j>", "10j", opt)
+  map("v", "<C-k>", "10j", opt)
 
   -- split
   map("n", "<leader>sh", ":split<CR>", opt)

@@ -1,10 +1,10 @@
 local M = {}
 
 function M:init()
-  bvim = {}
+  nvim = require("kide.config.defaults")
 
   -- todo 
-  bvim.lsp = require("kide.lsp.config")
+  nvim.lsp = require("kide.lsp.config")
 end
 
 return M

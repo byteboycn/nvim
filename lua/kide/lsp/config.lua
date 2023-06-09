@@ -54,7 +54,7 @@ local skipped_servers = {
 
 local skipped_filetypes = { "markdown", "rst", "plaintext", "toml", "proto" }
 
-local join_paths = require("lvim.utils").join_paths
+local join_paths = require("kide.utils").join_paths
 
 return {
   templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),

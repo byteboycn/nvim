@@ -1,6 +1,5 @@
-local config = require("kide.config")
-
-require("lazy").setup({
+-- local config = require("kide.config")
+local core_plugins = {
 
   {
     "nvim-lua/plenary.nvim",
@@ -16,11 +15,17 @@ require("lazy").setup({
   },
   {
     "williamboman/mason.nvim",
-    lazy = true,
-    event = { "VeryLazy" },
     config = function()
-      require("kide.plugins.config.mason-nvim")
+      require("kide.plugins.config.mason").setup()
     end,
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+    build = function()
+      pcall(function()
+        require("mason-registry").refresh()
+      end)
+    end,
+    event = "User FileOpened",
+    lazy = true,
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -130,7 +135,6 @@ require("lazy").setup({
     lazy = false,
     priority = 1000,
     config = function()
-
       vim.opt.background = "dark"
       vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_better_performance = true
@@ -269,13 +273,14 @@ require("lazy").setup({
   },
 
   {
-    "mfussenegger/nvim-dap-python",
-    lazy = true,
-    ft = "java",
-    dependencies = { "mfussenegger/nvim-dap" },
-    config = function()
-      require("dap-python").setup(config.env.py_bin)
-    end,
+    -- todo
+    -- "mfussenegger/nvim-dap-python",
+    -- lazy = true,
+    -- ft = "java",
+    -- dependencies = { "mfussenegger/nvim-dap" },
+    -- config = function()
+    --   require("dap-python").setup(config.env.py_bin)
+    -- end,
   },
 
   -- 搜索插件
@@ -458,7 +463,7 @@ require("lazy").setup({
     "numToStr/Comment.nvim",
     keys = {
       { "gcc", mode = { "n" }, desc = "Comment" },
-      { "gc", mode = { "x" }, desc = "Comment" },
+      { "gc",  mode = { "x" }, desc = "Comment" },
     },
     config = function()
       require("kide.plugins.config.comment")
@@ -774,32 +779,28 @@ require("lazy").setup({
     end,
   },
   {
-    "zbirenbaum/copilot.lua",
-    enabled = config.plugin.copilot.enable,
-    lazy = true,
-    cmd = "Copilot",
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
+    -- "zbirenbaum/copilot.lua",
+    -- enabled = config.plugin.copilot.enable,
+    -- lazy = true,
+    -- cmd = "Copilot",
+    -- config = function()
+    --   require("copilot").setup({
+    --     suggestion = { enabled = false },
+    --     panel = { enabled = false },
+    --   })
+    -- end,
   },
   {
-    "zbirenbaum/copilot-cmp",
-    enabled = config.plugin.copilot.enable,
-    lazy = true,
-    dependencies = { "zbirenbaum/copilot.lua" },
-    event = { "InsertEnter", "VeryLazy" },
-    config = function()
-      require("copilot_cmp").setup()
-    end,
+    -- "zbirenbaum/copilot-cmp",
+    -- enabled = config.plugin.copilot.enable,
+    -- lazy = true,
+    -- dependencies = { "zbirenbaum/copilot.lua" },
+    -- event = { "InsertEnter", "VeryLazy" },
+    -- config = function()
+    --   require("copilot_cmp").setup()
+    -- end,
   },
   { "Tastyep/structlog.nvim", lazy = true },
-}, {
-  ui = {
-    icons = {
-      task = " ",
-    },
-  },
-})
+}
+
+return core_plugins

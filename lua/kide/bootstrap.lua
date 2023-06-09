@@ -12,6 +12,8 @@ end
 local uv = vim.loop
 local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
 
+
+
 ---Join path segments that were passed as input
 ---@return string
 function _G.join_paths(...)
@@ -19,14 +21,14 @@ function _G.join_paths(...)
   return result
 end
 
-_G.require_clean = require("kide.utils.modules").require_clean
-_G.require_safe = require("kide.utils.modules").require_safe
-_G.reload = require("kide.utils.modules").reload
+-- _G.require_clean = require("kide.utils.modules").require_clean
+-- _G.require_safe = require("kide.utils.modules").require_safe
+-- _G.reload = require("kide.utils.modules").reload
 
----Get the full path to `$LUNARVIM_RUNTIME_DIR`
+---Get the full path to `$NVIM_RUNTIME_DIR`, the usual is ~/.local/share/nvim
 ---@return string|nil
 function _G.get_runtime_dir()
-  local lvim_runtime_dir = os.getenv "LUNARVIM_RUNTIME_DIR"
+  local lvim_runtime_dir = os.getenv "NVIM_RUNTIME_DIR"
   if not lvim_runtime_dir then
     -- when nvim is used directly
     return vim.call("stdpath", "data")
@@ -34,20 +36,20 @@ function _G.get_runtime_dir()
   return lvim_runtime_dir
 end
 
----Get the full path to `$LUNARVIM_CONFIG_DIR`
+---Get the full path to `$NVIM_CONFIG_DIR`, the usual is ~/.config/nvim
 ---@return string|nil
 function _G.get_config_dir()
-  local lvim_config_dir = os.getenv "LUNARVIM_CONFIG_DIR"
+  local lvim_config_dir = os.getenv "NVIM_CONFIG_DIR"
   if not lvim_config_dir then
     return vim.call("stdpath", "config")
   end
   return lvim_config_dir
 end
 
----Get the full path to `$LUNARVIM_CACHE_DIR`
+---Get the full path to `$NVIM_CACHE_DIR`, the usual is ~/.cache/nvim
 ---@return string|nil
 function _G.get_cache_dir()
-  local lvim_cache_dir = os.getenv "LUNARVIM_CACHE_DIR"
+  local lvim_cache_dir = os.getenv "NVIM_CACHE_DIR"
   if not lvim_cache_dir then
     return vim.call("stdpath", "cache")
   end
@@ -60,8 +62,8 @@ function M:init(base_dir)
   self.runtime_dir = get_runtime_dir()
   self.config_dir = get_config_dir()
   self.cache_dir = get_cache_dir()
-  self.pack_dir = join_paths(self.runtime_dir, "site", "pack")
-  self.lazy_install_dir = join_paths(self.pack_dir, "lazy", "opt", "lazy.nvim")
+  self.pack_dir = join_paths(self.runtime_dir)
+  self.lazy_install_dir = join_paths(self.pack_dir, "lazy", "lazy.nvim")
 
   ---@meta overridden to use LUNARVIM_CACHE_DIR instead, since a lot of plugins call this function internally
   ---NOTE: changes to "data" are currently unstable, see #2507
@@ -75,33 +77,18 @@ function M:init(base_dir)
 
   ---Get the full path to LunarVim's base directory
   ---@return string
-  function _G.get_lvim_base_dir()
+  function _G.get_nvim_base_dir()
     return base_dir
   end
 
-  if os.getenv "LUNARVIM_RUNTIME_DIR" then
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site"))
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "data"), "site", "after"))
-    -- vim.opt.rtp:prepend(join_paths(self.runtime_dir, "site"))
-    vim.opt.rtp:append(join_paths(self.runtime_dir, "lvim", "after"))
-    vim.opt.rtp:append(join_paths(self.runtime_dir, "site", "after"))
-
-    vim.opt.rtp:remove(vim.call("stdpath", "config"))
-    vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "after"))
-    vim.opt.rtp:prepend(self.config_dir)
-    vim.opt.rtp:append(join_paths(self.config_dir, "after"))
-
-    vim.opt.packpath = vim.opt.rtp:get()
-  end
-
-  require("lvim.plugin-loader").init {
+  require("kide.plugin-loader").init {
     package_root = self.pack_dir,
     install_path = self.lazy_install_dir,
   }
 
-  require("lvim.config"):init()
+  require("kide.config"):init()
 
-  require("lvim.core.mason").bootstrap()
+  require("kide.plugins.config.mason").bootstrap()
 
   return self
 end
