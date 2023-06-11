@@ -36,9 +36,9 @@ function Log:init()
     return nil
   end
 
-  local log_level = Log.levels[(lvim.log.level):upper() or "WARN"]
+  local log_level = Log.levels[(nvim.log.level):upper() or "WARN"]
   structlog.configure {
-    lvim = {
+    nvim = {
       pipelines = {
         {
           level = log_level,
@@ -69,10 +69,10 @@ function Log:init()
     },
   }
 
-  local logger = structlog.get_logger "lvim"
+  local logger = structlog.get_logger "nvim"
 
   -- Overwrite `vim.notify` to use the logger
-  if lvim.log.override_notify then
+  if nvim.log.override_notify then
     vim.notify = function(msg, vim_log_level, opts)
       notify_opts = opts or {}
 
@@ -142,7 +142,7 @@ end
 ---@return table|nil logger handle if found
 function Log:get_logger()
   local logger_ok, logger = pcall(function()
-    return require("structlog").get_logger "lvim"
+    return require("structlog").get_logger "nvim"
   end)
   if logger_ok and logger then
     return logger
@@ -161,7 +161,7 @@ end
 ---Retrieves the path of the logfile
 ---@return string path of the logfile
 function Log:get_path()
-  return string.format("%s/%s.log", get_cache_dir(), "lvim")
+  return string.format("%s/%s.log", get_cache_dir(), "nvim")
 end
 
 ---Add a log entry at TRACE level

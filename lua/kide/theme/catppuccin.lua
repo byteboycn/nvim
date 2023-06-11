@@ -1,7 +1,4 @@
-local M = {}
-
-function M.setup()
-  require("catppuccin").setup({
+local opts = {
     flavour = "frappe", -- latte, frappe, macchiato, mocha
     background = {
       -- :h background
@@ -52,10 +49,6 @@ function M.setup()
       markdown = true,
       -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
-  })
+  }
 
-  -- setup must be called before loading
-  vim.cmd.colorscheme "catppuccin"
-end
-
-return M
+return opts

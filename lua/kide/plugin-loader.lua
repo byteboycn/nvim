@@ -21,7 +21,7 @@ function plugin_loader.init(opts)
       "https://github.com/folke/lazy.nvim.git",
       lazy_install_dir,
     }
-    vim.api.nvim_create_autocmd("User", { pattern = "LazyDone", callback = require("lvim.lsp").setup })
+    vim.api.nvim_create_autocmd("User", { pattern = "LazyDone", callback = require("kide.lsp").setup })
   end
   vim.opt.rtp:prepend(lazy_install_dir)
 

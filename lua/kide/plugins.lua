@@ -44,13 +44,16 @@ local core_plugins = {
   {
     "neovim/nvim-lspconfig",
     event = { "BufNewFile", "BufReadPost" },
-    config = function()
-      require("kide.lsp")
-    end,
+    -- config = function()
+    --   require("kide.lsp")
+    -- end,
     dependencies = { "mason-lspconfig.nvim", "nlsp-settings.nvim" },
   },
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-
+  {
+    "folke/neodev.nvim",
+    lazy = true,
+  },
   -- 代码片段
   {
     "rafamadriz/friendly-snippets",
@@ -156,11 +159,11 @@ local core_plugins = {
   {
     "catppuccin/nvim",
     enabled = true,
-    lazy = false,
+    lazy = nvim.colorscheme ~= "catppuccin",
     priority = 1000,
-    config = function()
-      require("kide.theme.catppuccin").setup()
-    end
+    -- config = function()
+    --   require("kide.theme.catppuccin").setup()
+    -- end
   },
 
   -- 文件管理

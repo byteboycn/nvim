@@ -17,6 +17,7 @@ require("kide.bootstrap"):init(base_dir)
 local plugins = require("kide.plugins")
 require("kide.plugin-loader").load { plugins, nvim.plugins }
 
+require("kide.core.theme-loader").setup()
 
 vim.schedule(function()
   require("kide.core.keybindings").setup()

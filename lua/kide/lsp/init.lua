@@ -1,133 +1,125 @@
 local M = {}
-local Log = require("kide.core.log")
-local mason_lspconfig = require("mason-lspconfig")
-mason_lspconfig.setup({
-  ensure_installed = {
-    "lua_ls",
-  },
-})
+local Log = require "kide.core.log"
+local utils = require "kide.utils"
+local autocmds = require "kide.core.autocmds"
 
--- 安装列表
--- https://github.com/williamboman/nvim-lsp-installer#available-lsps
--- { key: 语言 value: 配置文件 }
-local server_configs = {
-  -- sumneko_lua -> lua_ls
-  lua_ls = require("kide.lsp.lua_ls"), -- /lua/lsp/lua.lua
-  -- jdtls = require "lsp.java", -- /lua/lsp/jdtls.lua
-  pyright = require("kide.lsp.pyright"),
-  rust_analyzer = require("kide.lsp.rust_analyzer"),
-  sqlls = require("kide.lsp.sqlls"),
-  kotlin_language_server = {},
-  vuels = {},
-  lemminx = require("kide.lsp.lemminx"),
-  gdscript = require("kide.lsp.gdscript"),
-}
-
--- Setup lspconfig.
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
--- 没有确定使用效果参数
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
-local utils = require("kide.core.utils")
-
--- LSP 进度UI
-require("fidget")
-require("mason-lspconfig").setup_handlers({
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
-  function(server_name) -- default handler (optional)
-    local lspconfig = require("lspconfig")
-    -- tools config
-    local cfg = utils.or_default(server_configs[server_name], {})
-
-    -- lspconfig
-    local scfg = utils.or_default(cfg.server, {})
-    -- scfg = vim.tbl_deep_extend("force", server:get_default_options(), scfg)
-    local on_attach = scfg.on_attach
-    scfg.on_attach = function(client, buffer)
-      -- 绑定快捷键
-      require("kide.core.keybindings").maplsp(client, buffer)
-      if client.server_capabilities.documentSymbolProvider then
-        require("nvim-navic").attach(client, buffer)
-      end
-      if on_attach then
-        on_attach(client, buffer)
-      end
-    end
-    scfg.flags = {
-      debounce_text_changes = 150,
-    }
-    scfg.capabilities = capabilities
-    if server_name == "rust_analyzer" then
-      -- Initialize the LSP via rust-tools instead
-      cfg.server = scfg
-      require("rust-tools").setup(cfg)
-    else
-      lspconfig[server_name].setup(scfg)
-    end
-  end,
-})
-
-for _, value in pairs(server_configs) do
-  if value.setup then
-    value.setup({
-      flags = {
-        debounce_text_changes = 150,
-      },
-      capabilities = capabilities,
-      on_attach = function(client, buffer)
-        -- 绑定快捷键
-        require("kide.core.keybindings").maplsp(client, buffer)
-        if client.server_capabilities.documentSymbolProvider then
-          require("nvim-navic").attach(client, buffer)
-        end
-      end,
-    })
+local function add_lsp_buffer_options(bufnr)
+  for k, v in pairs(lvim.lsp.buffer_options) do
+    vim.api.nvim_buf_set_option(bufnr, k, v)
   end
 end
 
--- LSP 相关美化参考 https://github.com/NvChad/NvChad
-local function lspSymbol(name, icon)
-  local hl = "DiagnosticSign" .. name
-  vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
+local function add_lsp_buffer_keybindings(bufnr)
+  local mappings = {
+    normal_mode = "n",
+    insert_mode = "i",
+    visual_mode = "v",
+  }
+
+  for mode_name, mode_char in pairs(mappings) do
+    for key, remap in pairs(lvim.lsp.buffer_mappings[mode_name]) do
+      local opts = { buffer = bufnr, desc = remap[2], noremap = true, silent = true }
+      vim.keymap.set(mode_char, key, remap[1], opts)
+    end
+  end
 end
 
-local lsp_ui = require("kide.lsp.lsp_ui")
-lspSymbol("Error", lsp_ui.diagnostics.icons.error)
-lspSymbol("Info", lsp_ui.diagnostics.icons.info)
-lspSymbol("Hint", lsp_ui.diagnostics.icons.hint)
-lspSymbol("Warn", lsp_ui.diagnostics.icons.warning)
+function M.common_capabilities()
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
 
-vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = false,
-})
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, lsp_ui.hover_actions)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp_ui.hover_actions)
+  return capabilities
+end
 
--- suppress error messages from lang servers
--- vim.notify = function(msg, log_level)
---   if msg:match "exit code" then
---     return
---   end
---   if log_level == vim.log.levels.ERROR then
---     vim.api.nvim_err_writeln(msg)
---   else
---     vim.api.nvim_echo({ { msg } }, true, {})
---   end
--- end
+function M.common_on_exit(_, _)
+  if lvim.lsp.document_highlight then
+    autocmds.clear_augroup "lsp_document_highlight"
+  end
+  if lvim.lsp.code_lens_refresh then
+    autocmds.clear_augroup "lsp_code_lens_refresh"
+  end
+end
+
+function M.common_on_init(client, bufnr)
+  if lvim.lsp.on_init_callback then
+    lvim.lsp.on_init_callback(client, bufnr)
+    Log:debug "Called lsp.on_init_callback"
+    return
+  end
+end
+
+function M.common_on_attach(client, bufnr)
+  if lvim.lsp.on_attach_callback then
+    lvim.lsp.on_attach_callback(client, bufnr)
+    Log:debug "Called lsp.on_attach_callback"
+  end
+  local lu = require "lvim.lsp.utils"
+  if lvim.lsp.document_highlight then
+    lu.setup_document_highlight(client, bufnr)
+  end
+  if lvim.lsp.code_lens_refresh then
+    lu.setup_codelens_refresh(client, bufnr)
+  end
+  add_lsp_buffer_keybindings(bufnr)
+  add_lsp_buffer_options(bufnr)
+  lu.setup_document_symbols(client, bufnr)
+end
+
+function M.get_common_opts()
+  return {
+    on_attach = M.common_on_attach,
+    on_init = M.common_on_init,
+    on_exit = M.common_on_exit,
+    capabilities = M.common_capabilities(),
+  }
+end
+
 function M.setup()
-  Log:debug("Setting up LSP support")
+  Log:debug "Setting up LSP support"
 
   local lsp_status_ok, _ = pcall(require, "lspconfig")
   if not lsp_status_ok then
     return
   end
 
+  if nvim.use_icons then
+    for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
+      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+    end
+  end
+
+  if not utils.is_directory(nvim.lsp.templates_dir) then
+    require("kide.lsp.templates").generate_templates()
+  end
+
+  pcall(function()
+    require("nlspsettings").setup(nvim.lsp.nlsp_settings.setup)
+  end)
+
+  require("kide.lsp.null-ls").setup()
+
+  autocmds.configure_format_on_save()
+
+  local function set_handler_opts_if_not_set(name, handler, opts)
+    if debug.getinfo(vim.lsp.handlers[name], "S").source:match(vim.env.VIMRUNTIME) then
+      vim.lsp.handlers[name] = vim.lsp.with(handler, opts)
+    end
+  end
+
+  set_handler_opts_if_not_set("textDocument/hover", vim.lsp.handlers.hover, { border = "rounded" })
+  set_handler_opts_if_not_set("textDocument/signatureHelp", vim.lsp.handlers.signature_help, { border = "rounded" })
 end
 
 return M

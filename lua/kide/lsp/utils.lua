@@ -1,6 +1,6 @@
 local M = {}
 
-local tbl = require "kide.uitls.table"
+local tbl = require "kide.utils.table"
 local Log = require "kide.core.log"
 
 function M.is_client_active(name)

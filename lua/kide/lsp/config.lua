@@ -104,7 +104,9 @@ return {
   ---@usage list of settings of nvim-lsp-installer
   installer = {
     setup = {
-      ensure_installed = {},
+      ensure_installed = {
+        "lua_ls",
+      },
       automatic_installation = {
         exclude = {},
       },
