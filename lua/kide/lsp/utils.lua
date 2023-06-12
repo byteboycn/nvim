@@ -73,7 +73,7 @@ function M.get_all_supported_filetypes()
 end
 
 function M.setup_document_highlight(client, bufnr)
-  if lvim.builtin.illuminate.active then
+  if nvim.builtin.illuminate.active then
     Log:debug "skipping setup for document_highlight, illuminate already active"
     return
   end
@@ -158,6 +158,17 @@ function M.format_filter(client)
   local s = require "null-ls.sources"
   local method = n.methods.FORMATTING
   local available_formatters = s.get_available(filetype, method)
+ --  Log:info(client.name)
+ --  Log:info(available_formatters)
+ --  Log:info(#available_formatters > 0)
+ --  Log:info(client.supports_method "textDocument/formatting")
+ -- 
+ --  if client.name == "null-ls" then
+ --    return true
+ --  else
+ --    return false
+ --  end
+
 
   if #available_formatters > 0 then
     return client.name == "null-ls"

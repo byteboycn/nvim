@@ -11,7 +11,7 @@ local builtins = {
   -- "lvim.core.treesitter",
   -- "lvim.core.nvimtree",
   -- "lvim.core.lir",
-  -- "lvim.core.illuminate",
+  "kide.core.illuminate",
   -- "lvim.core.indentlines",
   -- "lvim.core.breadcrumbs",
   -- "lvim.core.project",

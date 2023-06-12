@@ -54,7 +54,7 @@ local opts = {
         },
       },
       diagnostics = {
-        globals = { "vim", "lvim", "reload" },
+        globals = { "vim", "nvim", "reload" },
       },
       workspace = default_workspace,
     },

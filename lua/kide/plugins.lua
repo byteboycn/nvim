@@ -59,6 +59,14 @@ local core_plugins = {
     "rafamadriz/friendly-snippets",
     lazy = true,
   },
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("nvim.core.illuminate").setup()
+    end,
+    event = "User FileOpened",
+    enabled = nvim.builtin.illuminate.active,
+  },
   -- LuaSnip
   {
     "L3MON4D3/LuaSnip",
@@ -127,10 +135,6 @@ local core_plugins = {
   {
     "jose-elias-alvarez/null-ls.nvim",
     lazy = true,
-    event = { "BufNewFile", "BufReadPost" },
-    config = function()
-      require("kide.plugins.config.null-ls")
-    end,
   },
 
   -- 主题
