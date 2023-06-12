@@ -125,7 +125,17 @@ return {
     setup = {
       debug = false,
     },
-    config = {},
+    -- Setting a formatter will override the language server formatting capabilities.
+    -- see more https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting
+    config = {
+      formatters = {
+        {
+          command = "stylua"
+        },
+      },
+      linters = {},
+      code_actions = {},
+    },
   },
   ---@deprecated use lvim.lsp.automatic_configuration.skipped_servers instead
   override = {},

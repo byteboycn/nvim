@@ -110,6 +110,12 @@ function M.setup()
 
   require("kide.lsp.null-ls").setup()
 
+  require("kide.lsp.null-ls.formatters").setup(nvim.lsp.null_ls.config.formatters)
+
+  require("kide.lsp.null-ls.linters").setup(nvim.lsp.null_ls.config.linters)
+
+  require("kide.lsp.null-ls.code_actions").setup(nvim.lsp.null_ls.config.code_actions)
+
   autocmds.configure_format_on_save()
 
   local function set_handler_opts_if_not_set(name, handler, opts)
