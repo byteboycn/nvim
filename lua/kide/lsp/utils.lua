@@ -159,12 +159,9 @@ function M.format_filter(client)
   local method = n.methods.FORMATTING
   local available_formatters = s.get_available(filetype, method)
 
-  Log:info(client.name)
-  Log:info(#available_formatters > 0)
-  Log:info(client.supports_method "textdocument/formatting")
   if #available_formatters > 0 then
     return client.name == "null-ls"
-  elseif client.supports_method "textdocument/formatting" then
+  elseif client.supports_method "textDocument/formatting" then
     return true
   else
     return false
