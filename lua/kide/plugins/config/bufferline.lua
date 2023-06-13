@@ -85,6 +85,10 @@ require("bufferline").setup({
     numbers = function(opts)
       return string.format('%s', opts.ordinal)
     end,
+    indicator = {
+        icon = '▎', -- this should be omitted if indicator style is not 'icon'
+        style = 'icon', -- icon | underline | none
+    }
   },
 })
 
