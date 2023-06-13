@@ -17,6 +17,7 @@ local skipped_servers = {
   "gradle_ls",
   "graphql",
   "java_language_server",
+  "jdtls",
   "jedi_language_server",
   "ltex",
   "neocmake",
@@ -73,9 +74,12 @@ return {
   buffer_mappings = {
     normal_mode = {
       ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover" },
-      ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition" },
+      -- ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition" },
+      ["gd"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Goto definition" },
+      ["gj"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto definition" },
       ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration" },
-      ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Goto references" },
+      -- ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Goto references" },
+      ["gr"] = { "<cmd>Telescope lsp_references<cr>", "Goto references" },
       ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
       ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "show signature help" },
       ["gl"] = {
@@ -129,9 +133,9 @@ return {
     -- see more https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting
     config = {
       formatters = {
-        {
-          command = "stylua"
-        },
+        -- {
+        --   command = "stylua"
+        -- },
       },
       linters = {},
       code_actions = {},
