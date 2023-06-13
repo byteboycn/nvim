@@ -177,4 +177,24 @@ function M.format(opts)
   return vim.lsp.buf.format(opts)
 end
 
+function M.format_range()
+  local old_func = vim.go.operatorfunc
+  _G.op_func_formatting = function()
+    local start = vim.api.nvim_buf_get_mark(0, "[")
+    local finish = vim.api.nvim_buf_get_mark(0, "]")
+    local bfn = vim.api.nvim_get_current_buf()
+    M.format({
+      bufnr = bfn,
+      range = {
+        start,
+        finish,
+      },
+    })
+    vim.go.operatorfunc = old_func
+    _G.op_func_formatting = nil
+  end
+  vim.go.operatorfunc = "v:lua.op_func_formatting"
+  vim.api.nvim_feedkeys("g@", "n", false)
+end
+
 return M

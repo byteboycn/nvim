@@ -158,6 +158,7 @@ which_key.register({
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    f = { "<cmd>lua require('kide.lsp.utils').format_range()<cr>", "Format Range" },
   },
 }, {
   mode = "v",     -- VISUAL mode
