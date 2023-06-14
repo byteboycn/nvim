@@ -138,10 +138,24 @@ M.setup = function()
   map("n", "<leader>ri", "ciw<C-r>0<ESC>", opt)
 
   -- set keybinds for both INSERT and VISUAL.
-  vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
-  vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
-  vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
-  vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+  map("i", "<C-n>", "<Plug>luasnip-next-choice", {})
+  map("s", "<C-n>", "<Plug>luasnip-next-choice", {})
+  map("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
+  map("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+
+  -- switch to normal mode
+  map("i", "jk", "<ESC>", opt)
+  map("v", "jk", "<ESC>", opt)
+
+
+  -- 单行或多行移动
+  map("v", "J", ":m '>+1<CR>gv=gv", opt)
+  map("v", "K", ":m '<-2<CR>gv=gv", opt)
+
+  -- 移动到行首或者行尾，($ ^ 不好按)
+  map("v", "m", "$", opt)
+  map("v", "n", "^", opt)
+
 
   -- todo-comments
   vim.keymap.set("n", "]t", function()
@@ -212,15 +226,15 @@ M.maplsp = function(client, buffer)
     opt
   )
 
-  keymap("n", "<leader>=", function()
-    local bfn = vim.api.nvim_get_current_buf()
-    vim.lsp.buf.format({
-      bufnr = bfn,
-      filter = function(c)
-        return require("kide.lsp.utils").filter_format_lsp_client(c, bfn)
-      end,
-    })
-  end, bufopts)
+  -- keymap("n", "<leader>=", function()
+  --   local bfn = vim.api.nvim_get_current_buf()
+  --   vim.lsp.buf.format({
+  --     bufnr = bfn,
+  --     filter = function(c)
+  --       return require("kide.lsp.utils").filter_format_lsp_client(c, bfn)
+  --     end,
+  --   })
+  -- end, bufopts)
   -- vim.api.nvim_buf_set_keymap(
   --   buffer,
   --   "v",
