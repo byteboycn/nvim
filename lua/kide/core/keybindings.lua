@@ -121,10 +121,10 @@ M.setup = function()
   map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
 
   -- 快速滚动
-  map("n", "<C-d>", "10j", opt)
-  map("n", "<C-i>", "10k", opt)
-  map("v", "<C-d>", "10j", opt)
-  map("v", "<C-i>", "10j", opt)
+  map("n", "J", "10j", opt)
+  map("n", "K", "10k", opt)
+  -- map("v", "<C-d>", "10j", opt)
+  -- map("v", "<C-i>", "10j", opt)
 
   -- split
   map("n", "<leader>sh", ":split<CR>", opt)
@@ -145,7 +145,7 @@ M.setup = function()
 
   -- switch to normal mode
   map("i", "jk", "<ESC>", opt)
-  map("v", "jk", "<ESC>", opt)
+  map("v", "q", "<ESC>", opt)
 
 
   -- 单行或多行移动
@@ -154,7 +154,7 @@ M.setup = function()
 
   -- 移动到行首或者行尾，($ ^ 不好按)
   map("v", "H", "0", opt)
-  map("v", "l", "$", opt)
+  map("v", "L", "$", opt)
   map("n", "H", "0", opt)
   map("n", "L", "$", opt)
 
@@ -164,13 +164,19 @@ M.setup = function()
   -- 括号跳转
   map("n", "<C-e>", "%", opt)
 
+  -- Hop
+  keymap("n", "fl", "<Cmd>HopLine<CR>", opt)
+  keymap("n", "fw", "<Cmd>HopWordCurrentLine<CR>", opt)
+  keymap("n", "fa", "<Cmd>HopChar1CurrentLine<CR>", opt)
+  keymap("n", "ff", "<Cmd>HopWord<CR>", opt)
+
 
   -- todo-comments
-  vim.keymap.set("n", "]t", function()
+  keymap("n", "]t", function()
     require("todo-comments").jump_next()
   end, { desc = "Next todo comment" })
 
-  vim.keymap.set("n", "[t", function()
+  keymap("n", "[t", function()
     require("todo-comments").jump_prev()
   end, { desc = "Previous todo comment" })
 end
@@ -180,7 +186,7 @@ M.maplsp = function(client, buffer)
   vim.api.nvim_buf_set_option(buffer, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
   local bufopts = { noremap = true, silent = true, buffer = buffer }
-  vim.api.nvim_buf_set_keymap(buffer, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
+  vim.api.nvim_buf_set_keymap(buffer, "n", "N", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
   -- rename
   vim.api.nvim_buf_set_keymap(buffer, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
   -- mapbuf('n', '<leader>rn', '<cmd>lua require("lspsaga.rename").rename()<CR>', opt)

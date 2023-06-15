@@ -73,7 +73,7 @@ return {
   },
   buffer_mappings = {
     normal_mode = {
-      ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover" },
+      ["N"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover" },
       -- ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition" },
       ["gd"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Goto definition" },
       ["gj"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto definition" },

@@ -136,6 +136,14 @@ local core_plugins = {
     "jose-elias-alvarez/null-ls.nvim",
     lazy = true,
   },
+  {
+    "phaazon/hop.nvim",
+    branch = "v2",
+    lazy = false,
+    config = function()
+      require('hop').setup { keys = 'etovxqpdygfblzhckisuran' } 
+    end
+  },
 
   -- 主题
   -- use 'morhetz/gruvbox'
