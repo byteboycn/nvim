@@ -158,6 +158,9 @@ M.setup = function()
   map("n", "H", "0", opt)
   map("n", "L", "$", opt)
 
+  -- 删除当前位置至行尾
+  map("n", "dL", "d$", opt)
+
   -- 全选
   map("n", "yie", ":%y+<CR>", opt)
 
