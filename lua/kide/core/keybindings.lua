@@ -153,8 +153,16 @@ M.setup = function()
   map("v", "K", ":m '<-2<CR>gv=gv", opt)
 
   -- 移动到行首或者行尾，($ ^ 不好按)
-  map("v", "m", "$", opt)
-  map("v", "n", "^", opt)
+  map("v", "H", "0", opt)
+  map("v", "l", "$", opt)
+  map("n", "H", "0", opt)
+  map("n", "L", "$", opt)
+
+  -- 全选
+  map("n", "yie", ":%y+<CR>", opt)
+
+  -- 括号跳转
+  map("n", "<C-e>", "%", opt)
 
 
   -- todo-comments
