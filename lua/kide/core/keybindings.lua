@@ -168,10 +168,11 @@ M.setup = function()
   map("n", "<C-e>", "%", opt)
 
   -- Hop
-  keymap("n", "fl", "<Cmd>HopLine<CR>", opt)
-  keymap("n", "fw", "<Cmd>HopWordCurrentLine<CR>", opt)
-  keymap("n", "fa", "<Cmd>HopChar1CurrentLine<CR>", opt)
-  keymap("n", "ff", "<Cmd>HopWord<CR>", opt)
+  -- keymap("n", "fl", "<Cmd>HopLine<CR>", opt)
+  -- keymap("n", "fw", "<Cmd>HopWordCurrentLine<CR>", opt)
+  -- keymap("n", "fa", "<Cmd>HopChar1CurrentLine<CR>", opt)
+  -- keymap("n", "ff", "<Cmd>HopWord<CR>", opt)
+  -- -- keymap("n", "s", "<Cmd>HopChar2<CR>", opt)
 
 
   -- todo-comments

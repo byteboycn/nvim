@@ -136,15 +136,6 @@ local core_plugins = {
     "jose-elias-alvarez/null-ls.nvim",
     lazy = true,
   },
-  {
-    "phaazon/hop.nvim",
-    branch = "v2",
-    lazy = false,
-    config = function()
-      require('hop').setup { keys = 'etovxqpdygfblzhckisuran' } 
-    end
-  },
-
   -- 主题
   -- use 'morhetz/gruvbox'
   {
@@ -634,7 +625,6 @@ local core_plugins = {
   {
     "ggandor/leap.nvim",
     lazy = true,
-    keys = { "s", "S" },
     config = function()
       require("leap").add_default_mappings()
       require("leap").opts.safe_labels = {}
@@ -642,6 +632,15 @@ local core_plugins = {
       vim.keymap.del({ "x", "o" }, "X")
     end,
   },
+  {
+    "phaazon/hop.nvim",
+    branch = "v2",
+    lazy = true,
+    config = function()
+      require('hop').setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  },
+
 
   -- LSP 进度
   {
