@@ -621,7 +621,7 @@ local core_plugins = {
     end,
   },
 
-  -- 快速跳转
+  -- 快速跳转 leap or hop, current is leap
   {
     "ggandor/leap.nvim",
     lazy = true,
@@ -647,6 +647,7 @@ local core_plugins = {
   {
     "j-hui/fidget.nvim",
     lazy = true,
+    branch = "legacy",
     config = function()
       require("fidget").setup({
         text = {

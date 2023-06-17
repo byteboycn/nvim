@@ -179,7 +179,12 @@ local config = {
       selectionRange = { enabled = true },
       import = {
         gradle = { enabled = true },
-        maven = { enabled = true },
+        maven = { 
+          enabled = true , 
+          offline = {
+            enabled = true,
+          },
+        },
         exclusions = {
           "**/node_modules/**",
           "**/.metadata/**",
