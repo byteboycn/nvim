@@ -625,6 +625,7 @@ local core_plugins = {
   {
     "ggandor/leap.nvim",
     lazy = true,
+    keys = { "s", "S" },
     config = function()
       require("leap").add_default_mappings()
       require("leap").opts.safe_labels = {}
