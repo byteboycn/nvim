@@ -158,6 +158,16 @@ M.setup = function()
   map("n", "H", "0", opt)
   map("n", "L", "$", opt)
 
+  -- 移动到行尾，（v模式下，使用 $ 移动到行尾多一个字符）
+  -- keymap("v", "L", function ()
+  --   local cursor = vim.api.nvim_win_get_cursor(0)
+  --   local line = vim.api.nvim_get_current_line()
+  --   local len = string.len(line)
+  --   vim.api.nvim_win_set_cursor(0, {cursor[1], len - 1})
+  -- end, opt)
+
+
+
   -- 删除当前位置至行尾
   map("n", "dL", "d$", opt)
 
@@ -168,11 +178,11 @@ M.setup = function()
   map("n", "<C-e>", "%", opt)
 
   -- Hop
-  -- keymap("n", "fl", "<Cmd>HopLine<CR>", opt)
-  -- keymap("n", "fw", "<Cmd>HopWordCurrentLine<CR>", opt)
-  -- keymap("n", "fa", "<Cmd>HopChar1CurrentLine<CR>", opt)
-  -- keymap("n", "ff", "<Cmd>HopWord<CR>", opt)
-  -- -- keymap("n", "s", "<Cmd>HopChar2<CR>", opt)
+  keymap("n", "fl", "<Cmd>HopLine<CR>", opt)
+  keymap("n", "fw", "<Cmd>HopWordCurrentLine<CR>", opt)
+  keymap("n", "fa", "<Cmd>HopChar1CurrentLine<CR>", opt)
+  keymap("n", "ff", "<Cmd>HopWord<CR>", opt)
+  -- keymap("n", "s", "<Cmd>HopChar2<CR>", opt)
 
 
   -- todo-comments

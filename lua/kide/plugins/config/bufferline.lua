@@ -92,6 +92,8 @@ require("bufferline").setup({
   },
 })
 
+vim.opt.showtabline = 2
+
 
 -- Common kill function for bdelete and bwipeout
 -- credits: based on bbye and nvim-bufdel

@@ -13,7 +13,7 @@ local builtins = {
   -- "lvim.core.lir",
   "kide.core.illuminate",
   -- "lvim.core.indentlines",
-  -- "lvim.core.breadcrumbs",
+  "kide.plugins.config.nvim-navic",
   -- "lvim.core.project",
   -- "lvim.core.bufferline",
   -- "lvim.core.autopairs",

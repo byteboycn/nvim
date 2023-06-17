@@ -7,7 +7,7 @@ local core_plugins = {
   },
 
   {
-    "kyazdani42/nvim-web-devicons",
+    "nvim-tree/nvim-web-devicons",
     config = function()
       require("nvim-web-devicons").setup({})
     end,
@@ -636,7 +636,7 @@ local core_plugins = {
   {
     "phaazon/hop.nvim",
     branch = "v2",
-    lazy = true,
+    lazy = false,
     config = function()
       require('hop').setup { keys = 'etovxqpdygfblzhckisuran' }
     end
@@ -741,12 +741,13 @@ local core_plugins = {
     lazy = true,
   },
 
-  -- 代码状态栏导航
+  -- 代码状态栏导航 (位于窗口顶部，tabs下方)
   {
     "SmiteshP/nvim-navic",
     lazy = true,
+    event = "User FileOpened",
     config = function()
-      require("kide.plugins.config.nvim-navic")
+      require("kide.plugins.config.nvim-navic").setup()
     end,
   },
 
