@@ -642,6 +642,25 @@ local core_plugins = {
     end
   },
 
+  -- 自动保存当前打开的窗口 (nvim启动时不带任何参数生效)
+  -- 手动保存：SessionSave, SessionRestore
+  {
+    "rmagatti/auto-session",
+    lazy = false,
+    config = function ()
+      require("auto-session").setup {
+        log_level = "error",
+        auto_session_enable = true,
+        auto_save_enable = true,
+        auto_restore_enable = true,
+        auto_session_create_enabled = true,
+        -- auto save all dirs except suppress_dirs
+        auto_session_auto_session_allowed_dirs = {  },
+        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+      }
+    end
+  },
+
 
   -- LSP 进度
   {
