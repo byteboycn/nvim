@@ -65,6 +65,7 @@ require("nvim-tree").setup({
   },
   renderer = {
     root_folder_label = false,
+    -- 折叠空文件夹
     group_empty = true,
     indent_markers = {
       enable = false,

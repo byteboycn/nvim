@@ -143,6 +143,13 @@ which_key.register({
       "<cmd>lua require('kide.core.info').toggle_popup(vim.bo.filetype)<cr>", "Toggle ByteboycnVim Info",
     },
   },
+  D = {
+    name = "Database",
+    u = { "<Cmd>DBUIToggle<Cr>", "Toggle UI" },
+    f = { "<Cmd>DBUIFindBuffer<Cr>", "Find buffer" },
+    r = { "<Cmd>DBUIRenameBuffer<Cr>", "Rename buffer" },
+    q = { "<Cmd>DBUILastQueryInfo<Cr>", "Last query info" },
+  },
 }, {
   mode = "n",     -- NORMAL mode
   prefix = "<leader>",

@@ -703,26 +703,47 @@ local core_plugins = {
   },
 
   -- databases
+  -- https://alpha2phi.medium.com/neovim-for-beginners-database-explorer-7db3d3910876
+  -- 客户端说明，每种数据库都只能使用原生客户端，alias不行，会有which命令校验路径
+  -- mysql-client: brew install mysql-client
+  -- redis: ln -s
   {
     "nanotee/sqls.nvim",
     lazy = true,
+    module = { "sqls" },
     ft = { "sql", "mysql" },
+    cmd = {
+      "SqlsExecuteQuery",
+      "SqlsExecuteQueryVertical",
+      "SqlsShowDatabases",
+      "SqlsShowSchemas",
+      "SqlsShowConnections",
+      "SqlsSwitchDatabase",
+      "SqlsSwitchConnection",
+    },
   },
   {
     "tpope/vim-dadbod",
     lazy = true,
+    dependencies = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion",
+    },
+    config = function()
+      require("kide.plugins.config.dadbod").setup()
+    end,
+    cmd = { "DBUIToggle", "DBUI", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
   },
   {
     "kristijanhusak/vim-dadbod-ui",
     lazy = true,
-    dependencies = { "tpope/vim-dadbod" },
-    cmd = {
-      "DBUI",
-      "DBUIToggle",
-    },
     init = function()
       vim.g.db_ui_use_nerd_fonts = 1
     end,
+  },
+  {
+    "kristijanhusak/vim-dadbod-completion",
+    lazy = true,
   },
 
   {

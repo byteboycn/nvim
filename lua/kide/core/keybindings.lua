@@ -176,6 +176,7 @@ M.setup = function()
 
   -- 括号跳转
   map("n", "<C-e>", "%", opt)
+  map("v", "<C-e>", "%", opt)
 
   -- Hop
   keymap("n", "fl", "<Cmd>HopLine<CR>", opt)
