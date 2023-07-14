@@ -50,6 +50,7 @@ local skipped_servers = {
   "verible",
   "vtsls",
   "vuels",
+  "yamlls",
 }
 
 local skipped_filetypes = { "markdown", "rst", "plaintext", "toml", "proto" }
